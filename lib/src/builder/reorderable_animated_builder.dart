@@ -32,6 +32,7 @@ class ReorderableAnimatedBuilder<E> extends StatefulWidget {
   final Duration dragStartDelay;
   final List<int> nonDraggableIndices;
   final List<int> lockedIndices;
+  final bool addDragStartListener;
 
   const ReorderableAnimatedBuilder(
       {Key? key,
@@ -49,7 +50,8 @@ class ReorderableAnimatedBuilder<E> extends StatefulWidget {
       this.longPressDraggable = false,
       required this.dragStartDelay,
       required this.nonDraggableIndices,
-      required this.lockedIndices})
+      required this.lockedIndices,
+      required this.addDragStartListener})
       : assert(initialCount >= 0),
         super(key: key);
 
@@ -848,6 +850,14 @@ class ReorderableAnimatedBuilderState extends State<ReorderableAnimatedBuilder>
       return true;
     }());
     final Key itemGlobalKey = _MotionBuilderItemGlobalKey(item.key!, this);
+
+    if (!widget.addDragStartListener) {
+      return SizedBox(
+        key: itemGlobalKey,
+        child: itemWithSemantics,
+      );
+    }
+
     if (widget.buildDefaultDragHandles) {
       switch (Theme.of(context).platform) {
         case TargetPlatform.linux:

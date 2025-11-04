@@ -286,6 +286,26 @@ class AnimatedGridView<E extends Object> extends StatefulWidget {
   /// Defaults to true.
   final bool enableSwap;
 
+  /// Whether to add a [ReorderableGridDragStartListener] to the reorderable ItemBuilder.
+  /// 
+  /// Defaults to true.
+  /// 
+  /// If set to false, the items in ItemBuilder will not respond to pointer down events,
+  /// which means they won't be draggable. This can be useful if you still want to
+  /// receive item pointer events, and add your custom drag start listener
+  /// to the item widget.
+  /// 
+  /// Example:
+  /// ```dart
+  /// ReorderableGridDragStartListener(
+  ///   index: dragIndex,
+  ///   child: const Icon(
+  ///     Icons.drag_handle_outlined,
+  ///   ),
+  /// ),
+  /// ```
+  final bool addDragStartListener;
+
   /// Creates a [AnimatedGridView] that animates insertion and removal of the item.
   const AnimatedGridView(
       {Key? key,
@@ -311,7 +331,8 @@ class AnimatedGridView<E extends Object> extends StatefulWidget {
       this.removeItemBuilder,
       this.shrinkWrap = false,
       required this.isSameItem,
-      this.enableSwap = true})
+      this.enableSwap = true,
+      this.addDragStartListener = true})
       : super(key: key);
 
   /// The state from the closest instance of this class that encloses the given
@@ -392,7 +413,8 @@ class AnimatedGridViewState<E extends Object>
                 insertItemBuilder: widget.insertItemBuilder,
                 removeItemBuilder: widget.removeItemBuilder,
                 isSameItem: widget.isSameItem,
-                enableSwap: widget.enableSwap),
+                enableSwap: widget.enableSwap,
+                addDragStartListener: widget.addDragStartListener),
           ),
         ]);
   }

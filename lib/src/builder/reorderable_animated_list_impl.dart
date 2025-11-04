@@ -28,6 +28,7 @@ class ReorderableAnimatedListImpl<E extends Object>
     List<E> nonDraggableItems = const [],
     List<E> lockedItems = const [],
     bool enableSwap = true,
+    bool addDragStartListener = true,
   }) : super(
             key: key,
             items: items,
@@ -49,7 +50,8 @@ class ReorderableAnimatedListImpl<E extends Object>
             dragStartDelay: dragStartDelay,
             nonDraggableItems: nonDraggableItems,
             lockedItems: lockedItems,
-            enableSwap: enableSwap);
+            enableSwap: enableSwap,
+            addDragStartListener: addDragStartListener);
 
   const ReorderableAnimatedListImpl.grid({
     Key? key,
@@ -74,6 +76,7 @@ class ReorderableAnimatedListImpl<E extends Object>
     List<E> nonDraggableItems = const [],
     List<E> lockedItems = const [],
     bool enableSwap = true,
+    bool addDragStartListener = true,
   }) : super(
             key: key,
             items: items,
@@ -96,7 +99,8 @@ class ReorderableAnimatedListImpl<E extends Object>
             dragStartDelay: dragStartDelay,
             nonDraggableItems: nonDraggableItems,
             lockedItems: lockedItems,
-            enableSwap: enableSwap);
+            enableSwap: enableSwap,
+            addDragStartListener: addDragStartListener);
 
   @override
   ReorderableAnimatedListImplState<E> createState() =>
@@ -127,6 +131,7 @@ class ReorderableAnimatedListImplState<E extends Object>
       dragStartDelay: dragStartDelay,
       nonDraggableIndices: nonDraggableItems,
       lockedIndices: lockedIndices,
+      addDragStartListener: addDragStartListener,
     );
   }
 }

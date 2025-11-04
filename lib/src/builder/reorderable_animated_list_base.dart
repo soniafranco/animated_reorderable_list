@@ -38,6 +38,7 @@ abstract class ReorderableAnimatedListBase<W extends Widget, E extends Object>
   final List<E> nonDraggableItems;
   final List<E> lockedItems;
   final bool enableSwap;
+  final bool addDragStartListener;
 
   const ReorderableAnimatedListBase(
       {Key? key,
@@ -61,7 +62,8 @@ abstract class ReorderableAnimatedListBase<W extends Widget, E extends Object>
       this.dragStartDelay,
       this.enableSwap = true,
       required this.nonDraggableItems,
-      required this.lockedItems})
+      required this.lockedItems,
+      this.addDragStartListener = true})
       : assert(itemBuilder != null),
         super(key: key);
 }
@@ -178,6 +180,10 @@ abstract class ReorderableAnimatedListBaseState<
       })
       .map((entry) => entry.key)
       .toList();
+
+  @nonVirtual
+  @protected
+  bool get addDragStartListener => widget.addDragStartListener;
 
   @override
   void initState() {
